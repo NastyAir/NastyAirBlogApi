@@ -3,8 +3,7 @@ package route
 import (
 	"net/http"
 	"fmt"
-	"../dao"
-	"../common"
+	"../service"
 	"encoding/json"
 )
 
@@ -19,16 +18,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		//fmt.Println("username:", account)
 		//fmt.Println("password:", password)
 	}
-	var isAuth bool
-	isAuth = dao.UserFindByAccount(account[0], password[0])
-	msg := new(common.RestMsg)
+	var msg = service.Login(account[0], password[0])
 	var data []byte
-	if isAuth {
-		msg.Code = common.SUCCESS
-		data, _ = json.Marshal(msg)
-	} else {
-		msg.Code = common.FAIL
-		data, _ = json.Marshal(msg)
-	}
+	data, _ = json.Marshal(msg)
 	fmt.Fprintf(w, string(data))
 }
