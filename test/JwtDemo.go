@@ -11,7 +11,6 @@ import (
 	"github.com/codegangsta/negroni"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go/request"
-	"NastyAir/goJWTTest01/goPath/src/github.com/dgrijalva/jwt-go"
 )
 
 const (
