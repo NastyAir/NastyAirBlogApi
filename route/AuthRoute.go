@@ -14,9 +14,11 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		//请求的是登陆数据，那么执行登陆的逻辑判断
 		account = r.Form["username"]
 		password = r.Form["password"]
-		//fmt.Println("username:", account)
-		//fmt.Println("password:", password)
 	}
-	var data = service.Login(account[0], password[0])
-	Utils.JsonResponse(data, w)
+	if len(account) < 1 || len(password) < 1 {
+		Utils.CustomHttpCodeResponse("参数错误", http.StatusBadRequest, w)
+	} else {
+		var data = service.Login(account[0], password[0])
+		Utils.JsonResponse(data, w)
+	}
 }

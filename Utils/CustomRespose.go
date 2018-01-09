@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"encoding/json"
 	"html/template"
+	"fmt"
 )
 
 func JsonResponse(response interface{}, w http.ResponseWriter) {
@@ -24,4 +25,8 @@ func PageResponse(pageUrl string, w http.ResponseWriter, ) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	t, _ := template.ParseFiles(pageUrl)
 	t.Execute(w, nil)
+}
+func CustomHttpCodeResponse(msg string,httpCode int, w http.ResponseWriter, ) {
+	w.WriteHeader(httpCode)
+	fmt.Fprintln(w, msg)
 }
