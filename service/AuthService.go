@@ -1,13 +1,14 @@
 package service
 
 import (
-	"../dao"
-	"../common"
+
 	"NastyAir/Blog/entity"
 	"time"
 	"github.com/dgrijalva/jwt-go"
 	"log"
 	"errors"
+	"NastyAir/Blog/dao"
+	"NastyAir/Blog/common"
 )
 
 const (

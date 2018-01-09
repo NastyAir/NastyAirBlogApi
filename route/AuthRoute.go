@@ -2,8 +2,8 @@ package route
 
 import (
 	"net/http"
-	"../service"
 	"NastyAir/Blog/Utils"
+	"NastyAir/Blog/service"
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {
