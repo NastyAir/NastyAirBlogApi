@@ -3,19 +3,21 @@ package service
 import (
 	"../dao"
 	"../common"
+	"NastyAir/Blog/entity"
 )
 
 func Login(account, password string) common.RestMsg {
 
-	var isAuth bool
-	isAuth = dao.UserFindByAccount(account, password);
+	var user entity.UserCredentials
+	user = dao.UserFindByAccount(account, password);
 	msg := new(common.RestMsg)
 	//var data []byte
-	if isAuth {
+	if user.Password == password {
 		msg.Code = common.SUCCESS
-		//data, _ = json.Marshal(msg)
+		msg.Msg = "auth success"
 	} else {
 		msg.Code = common.FAIL
+		msg.Msg = "auth fail"
 	}
 	return *msg
 }

@@ -2,9 +2,8 @@ package route
 
 import (
 	"net/http"
-	"fmt"
 	"../service"
-	"encoding/json"
+	"NastyAir/Blog/Utils"
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {
@@ -18,8 +17,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		//fmt.Println("username:", account)
 		//fmt.Println("password:", password)
 	}
-	var msg = service.Login(account[0], password[0])
-	var data []byte
-	data, _ = json.Marshal(msg)
-	fmt.Fprintf(w, string(data))
+	var data = service.Login(account[0], password[0])
+	Utils.JsonResponse(data, w)
 }
