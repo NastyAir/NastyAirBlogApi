@@ -23,5 +23,7 @@ func registerRoute() {
 	//设置静态资源访问
 	http.Handle("/dist/", http.StripPrefix("/dist/", http.FileServer(http.Dir("./dist"))))
 	http.HandleFunc("/", route.IndexPage)
-	http.HandleFunc("/login", route.Login) //设置访问的路由
+	http.HandleFunc("/login", route.Login)
+	http.HandleFunc("/blog", route.Blog)
+
 }

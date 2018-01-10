@@ -6,10 +6,11 @@ import (
 )
 
 func BlogInsert(blog entity.Blog) (int64, error) {
-	stmt, err := Db.Prepare(`INSERT blog(id,title,content,tag_id,word_num,read_num,comment_num,like_num,version,user_id,create_date,update_date) values (?,?,?,?,?,?,?,?,?,?,?,?)`)
+	stmt, err := Db.Prepare(`INSERT blog(id,blog_id,title,content,tag_id,word_num,read_num,comment_num,like_num,version,user_id,create_date,update_date) values (?,?,?,?,?,?,?,?,?,?,?,?,?)`)
 	checkErr(err)
 	res, err := stmt.Exec(
 		blog.Id,
+		blog.BlogId,
 		blog.Title,
 		blog.Content,
 		blog.TagId,
@@ -28,3 +29,4 @@ func BlogInsert(blog entity.Blog) (int64, error) {
 	fmt.Println(id)
 	return id, err
 }
+

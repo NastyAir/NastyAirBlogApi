@@ -2,6 +2,7 @@ package entity
 
 type Blog struct {
 	Id         int
+	BlogId     string
 	Title      string
 	Content    string
 	TagId      int
