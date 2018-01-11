@@ -10,7 +10,13 @@ import (
 
 func Blog(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
-	if r.Method == "POST" {
+	var offset, length []string
+
+	if r.Method == "GET" {
+		offset = r.Form["offset"]
+		length = r.Form["length"]
+		service.
+	} else    if r.Method == "POST" {
 		var blog entity.Blog
 		err := json.NewDecoder(r.Body).Decode(&blog)
 		if err != nil {
