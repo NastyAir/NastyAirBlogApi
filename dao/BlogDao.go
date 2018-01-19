@@ -2,7 +2,6 @@ package dao
 
 import (
 	"NastyAir/Blog/entity"
-	"os/user"
 )
 
 func BlogInsert(blog entity.Blog) (int64, error) {
@@ -37,10 +36,11 @@ func BlogInsert(blog entity.Blog) (int64, error) {
 	return id, err
 }
 
-func BlogSelectByPage(limit, size int) (entity.Blog, error) {
+func BlogSelectByPage(limit, size int) ([]entity.Blog, error) {
 	rows, err := Db.Query("SELECT id,	blog_id, title, content, tag_id, word_num, read_num, comment_num,	like_num, version, user_id, create_date, update_date FROM blog LIMIT ?,?",limit,size)
 	checkErr(err)
 	var blog entity.Blog
+	var blogList []entity.Blog
 	for rows.Next() {
 		err = rows.Scan(
 			&blog.Id,
@@ -56,8 +56,9 @@ func BlogSelectByPage(limit, size int) (entity.Blog, error) {
 			&blog.UserId,
 			&blog.CreateDate,
 			&blog.UpdateDate,)
+		blogList=append(blogList, blog)
 	}
 	defer rows.Close()
 	//checkErr(err)
-	return blog,err
+	return blogList,err
 }

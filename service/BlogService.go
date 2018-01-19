@@ -26,7 +26,7 @@ func BlogCreate(blog entity.Blog) (common.RestMsg, error) {
 	return *msg, err
 }
 
-func BlogList(offset, length int) ([]entity.Blog, error) {
+func BlogList(offset, length int) (common.RestMsg, error) {
 
 	blogs, err := dao.BlogSelectByPage(offset, length)
 	msg := new(common.RestMsg)
@@ -42,7 +42,7 @@ func BlogList(offset, length int) ([]entity.Blog, error) {
 		msg.Msg = "create blog success"
 		msg.Data = make(map[string]string)
 		str, _ := json.Marshal(blogs)
-		msg.Data["blog"] = str
+		msg.Data["blog"] = string(str)
 	}
 	return *msg, err
 }
